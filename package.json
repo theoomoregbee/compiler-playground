@@ -1,0 +1,27 @@
+{
+  "name": "compiler-playground",
+  "version": "1.0.0",
+  "description": "Building a compiler with JS playground",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theoomoregbee/compiler-playground.git"
+  },
+  "keywords": [
+    "compiler",
+    "learning",
+    "parser"
+  ],
+  "author": "Theophilus Omoregbee <theo4u@ymail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theoomoregbee/compiler-playground/issues"
+  },
+  "homepage": "https://github.com/theoomoregbee/compiler-playground#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
