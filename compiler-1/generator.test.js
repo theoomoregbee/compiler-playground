@@ -23,7 +23,7 @@ const input = {
   ],
 };
 
-test("generate paper to svg", () => {
+test("generate svg for Drawing ast", () => {
   const svg = generator(input);
 
   expect(svg).toEqual(

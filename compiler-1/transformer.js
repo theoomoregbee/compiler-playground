@@ -33,9 +33,21 @@ const transformer = (ast) => {
         });
         break;
       case "Pen":
-        penColor = 100 - node.arguments[0].value; // keep current pen color in `pen_color` variable
-
+        // keep current pen color in `penColor` variable
+        penColor = 100 - node.arguments[0].value;
+        break;
       case "Line":
+        svgAst.body.push({
+          tag: "line",
+          attr: {
+            x1: node.arguments[0].value,
+            y1: node.arguments[1].value,
+            x2: node.arguments[2].value,
+            y2: node.arguments[3].value,
+            "stroke-linecap": "round",
+            stroke: `rgb(${penColor}%, ${penColor}%, ${penColor}%)`,
+          },
+        });
         break;
     }
   }

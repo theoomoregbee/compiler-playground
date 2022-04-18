@@ -1,5 +1,12 @@
-const throwUnImplementedError = () => {
-  throw "Unimplemented functionality";
+const createNumberLiteralArg = (token, invalidTokenMessage) => {
+  if (token && token.type === "number") {
+    return {
+      type: "NumberLiteral",
+      value: token.value,
+    };
+  } else {
+    throw invalidTokenMessage;
+  }
 };
 
 const parser = (tokens) => {
@@ -17,31 +24,46 @@ const parser = (tokens) => {
       continue;
     }
 
+    const expression = {
+      type: "CallExpression",
+      arguments: [],
+    };
+
     switch (currentToken.value) {
       case "Paper":
-        const expression = {
-          type: "CallExpression",
-          name: "Paper",
-          arguments: [],
-        };
+        expression.name = "Paper";
         // if current token is CallExpression of type Paper, next token should be color argument
         const argument = tokens.shift();
-        if (argument.type === "number") {
-          expression.arguments.push({
-            // add argument information to expression object
-            type: "NumberLiteral",
-            value: argument.value,
-          });
-          AST.body.push(expression); // push the expression object to body of our AST
-        } else {
-          throw "Paper command must be followed by a number.";
-        }
+
+        const numberLiteral = createNumberLiteralArg(
+          argument,
+          "Paper command must be followed by a number."
+        );
+        expression.arguments.push(numberLiteral);
         break;
       case "Pen":
+        expression.name = "Pen";
+        const colorArg = tokens.shift();
+        const colorNumberLiteral = createNumberLiteralArg(
+          colorArg,
+          "Pen command must be followed by a number."
+        );
+        expression.arguments.push(colorNumberLiteral);
+
+        break;
       case "Line":
-        throwUnImplementedError();
+        expression.name = "Line";
+        const invalidLineToken = "Line command must be followed by 4 numbers.";
+        // Line expression takes 4 arguments
+        for (let i = 0; i < 4; i++) {
+          const arg = tokens.shift();
+          expression.arguments.push(
+            createNumberLiteralArg(arg, invalidLineToken)
+          );
+        }
         break;
     }
+    AST.body.push(expression); // push the expression object to body of our AST
   }
 
   return AST;

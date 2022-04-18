@@ -20,12 +20,14 @@ const SBN = {
 };
 
 const code = `
-Paper 0
-Pen 100
-Line 0 50 100 50
+Paper 100
+Pen 0
+Line 50 77 22 27
+Line 22 27 78 27
+Line 78 27 50 77
 `;
 
-fs.writeFile("SBN_drawing.svg", SBN.compile(code), (err) => {
+fs.writeFile("compiler-1/SBN_drawing.svg", SBN.compile(code), (err) => {
   if (err) {
     return console.error(err);
   }
