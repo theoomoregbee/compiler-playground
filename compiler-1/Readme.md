@@ -7,6 +7,14 @@ Following this medium post https://medium.com/@kosamari/how-to-be-a-compiler-mak
 - Transformer
 - Generator
 
+### Generate svg
+
 ```sh
 node compiler-1/compiler.js
+```
+
+### Serve webpage for result
+
+```js
+serve compiler-1/
 ```
